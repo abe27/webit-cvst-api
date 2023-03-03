@@ -105,11 +105,13 @@ type ConfirmEquipment struct {
 	ConfirmByID            *string                `json:"accep_by_id" form:"accep_by_id"`
 	Recording              string                 `json:"recording" form:"recording"`
 	Remark                 string                 `json:"remark" form:"remark"`
+	RequestStatusID        *string                `json:"request_status_id" form:"request_status_id"`
 	IsActive               bool                   `json:"is_active" form:"is_active" binding:"required"`
 	CreatedAt              time.Time              `json:"created_at" default:"now"`
 	UpdatedAt              time.Time              `json:"updated_at" default:"now"`
 	RepairEquipmentRequest RepairEquipmentRequest `gorm:"foreignKey:RepairRequestID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"request_id"`
 	Profile                Profile                `gorm:"foreignKey:ConfirmByID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"confirm_by"`
+	RequestStatus          RequestStatus          `gorm:"foreignKey:RequestStatusID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"request_status"`
 }
 
 func (obj *ConfirmEquipment) BeforeCreate(tx *gorm.DB) (err error) {
