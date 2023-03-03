@@ -8,12 +8,12 @@ import (
 )
 
 type AssetType struct {
-	ID          string    `json:"id,omitempty"`
-	Title       string    `gorm:"not null;size:50;unique;" json:"title,omitempty" form:"title" binding:"required"`
-	Description string    `json:"description,omitempty" form:"description" binding:"required"`
-	IsActive    bool      `json:"is_active,omitempty" form:"is_active" binding:"required"`
-	CreatedAt   time.Time `json:"created_at,omitempty" default:"now"`
-	UpdatedAt   time.Time `json:"updated_at,omitempty" default:"now"`
+	ID          string    `json:"id"`
+	Title       string    `gorm:"not null;size:50;unique;" json:"title" form:"title" binding:"required"`
+	Description string    `json:"description" form:"description" binding:"required"`
+	IsActive    bool      `json:"is_active" form:"is_active" binding:"required"`
+	CreatedAt   time.Time `json:"created_at" default:"now"`
+	UpdatedAt   time.Time `json:"updated_at" default:"now"`
 }
 
 func (obj *AssetType) BeforeCreate(tx *gorm.DB) (err error) {
@@ -23,12 +23,12 @@ func (obj *AssetType) BeforeCreate(tx *gorm.DB) (err error) {
 }
 
 type AssetModel struct {
-	ID          string    `json:"id,omitempty"`
-	Title       string    `gorm:"not null;size:50;unique;" json:"title,omitempty" form:"title" binding:"required"`
-	Description string    `json:"description,omitempty" form:"description" binding:"required"`
-	IsActive    bool      `json:"is_active,omitempty" form:"is_active" binding:"required"`
-	CreatedAt   time.Time `json:"created_at,omitempty" default:"now"`
-	UpdatedAt   time.Time `json:"updated_at,omitempty" default:"now"`
+	ID          string    `json:"id"`
+	Title       string    `gorm:"not null;size:50;unique;" json:"title" form:"title" binding:"required"`
+	Description string    `json:"description" form:"description" binding:"required"`
+	IsActive    bool      `json:"is_active" form:"is_active" binding:"required"`
+	CreatedAt   time.Time `json:"created_at" default:"now"`
+	UpdatedAt   time.Time `json:"updated_at" default:"now"`
 }
 
 func (obj *AssetModel) BeforeCreate(tx *gorm.DB) (err error) {
@@ -38,12 +38,12 @@ func (obj *AssetModel) BeforeCreate(tx *gorm.DB) (err error) {
 }
 
 type AssetModelName struct {
-	ID          string    `json:"id,omitempty"`
-	Title       string    `gorm:"not null;size:50;unique;" json:"title,omitempty" form:"title" binding:"required"`
-	Description string    `json:"description,omitempty" form:"description" binding:"required"`
-	IsActive    bool      `json:"is_active,omitempty" form:"is_active" binding:"required"`
-	CreatedAt   time.Time `json:"created_at,omitempty" default:"now"`
-	UpdatedAt   time.Time `json:"updated_at,omitempty" default:"now"`
+	ID          string    `json:"id"`
+	Title       string    `gorm:"not null;size:50;unique;" json:"title" form:"title" binding:"required"`
+	Description string    `json:"description" form:"description" binding:"required"`
+	IsActive    bool      `json:"is_active" form:"is_active" binding:"required"`
+	CreatedAt   time.Time `json:"created_at" default:"now"`
+	UpdatedAt   time.Time `json:"updated_at" default:"now"`
 }
 
 func (obj *AssetModelName) BeforeCreate(tx *gorm.DB) (err error) {
