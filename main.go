@@ -41,6 +41,10 @@ func init() {
 	if err != nil {
 		panic("Failed to connect to database")
 	}
+
+	configs.API_TRIGGER_URL = os.Getenv("API_TRIGGER_URL")
+	configs.APP_NAME = os.Getenv("APP_NAME")
+	configs.APP_DESCRIPTION = os.Getenv("APP_DESCRIPTION")
 }
 
 func main() {

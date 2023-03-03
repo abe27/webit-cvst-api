@@ -44,6 +44,7 @@ type Profile struct {
 	PrefixNameID *string    `json:"prefix_name_id,omitempty" form:"prefix_name_id"`
 	FirstName    string     `gorm:"not null;size:50;" json:"first_name,omitempty" form:"first_name"`
 	LastName     string     `gorm:"not null;size:50;" json:"last_name,omitempty" form:"last_name"`
+	PhoneNo      string     `json:"phone_no,omitempty" form:"phone_no"`
 	UserID       *string    `gorm:"not null;unique;" json:"user_id,omitempty" form:"user_id"`
 	PositionID   *string    `json:"position_id,omitempty" form:"position_id"`
 	DepartmentID *string    `json:"department_id,omitempty" form:"department_id"`
@@ -56,7 +57,7 @@ type Profile struct {
 	Whs          Whs        `gorm:"foreignKey:WhsID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"whs,omitempty"`
 	Position     Position   `gorm:"foreignKey:PositionID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"position,omitempty"`
 	Department   Department `gorm:"foreignKey:DepartmentID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"department,omitempty"`
-	Section      Department `gorm:"foreignKey:SectionID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"section,omitempty"`
+	Section      Section    `gorm:"foreignKey:SectionID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"section,omitempty"`
 	PrefixName   PrefixName `gorm:"foreignKey:PrefixNameID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"prefix_name,omitempty"`
 }
 
