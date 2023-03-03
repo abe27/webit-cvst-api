@@ -59,7 +59,7 @@ func (obj *ImageAsset) BeforeCreate(tx *gorm.DB) (err error) {
 	return
 }
 
-type RepairRequest struct {
+type RepairEquipmentRequest struct {
 	ID              string        `json:"id,omitempty"`
 	RequestDate     time.Time     `json:"request_date,omitempty" form:"request_date"`
 	RequestNo       string        `gorm:"size:25;" json:"request_no" form:"request_no"`
@@ -77,23 +77,41 @@ type RepairRequest struct {
 	RequestType     RequestType   `gorm:"foreignKey:RequestTypeID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"request_type,omitempty"`
 }
 
-func (obj *RepairRequest) BeforeCreate(tx *gorm.DB) (err error) {
+func (obj *RepairEquipmentRequest) BeforeCreate(tx *gorm.DB) (err error) {
 	id, _ := g.New()
 	obj.ID = id
 	return
 }
 
 type ImageRequest struct {
-	ID              string        `json:"id,omitempty"`
-	RepairRequestID *string       `json:"repair_request_id,omitempty" form:"repair_request_id" binding:"required"`
-	UrlImage        string        `json:"url_image,omitempty" form:"url_image" binding:"required"`
-	IsActive        bool          `json:"is_active,omitempty" form:"is_active" binding:"required"`
-	CreatedAt       time.Time     `json:"created_at,omitempty" default:"now"`
-	UpdatedAt       time.Time     `json:"updated_at,omitempty" default:"now"`
-	RepairRequest   RepairRequest `gorm:"foreignKey:RepairRequestID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"request_id,omitempty"`
+	ID                     string                 `json:"id,omitempty"`
+	RepairRequestID        *string                `json:"repair_request_id,omitempty" form:"repair_request_id" binding:"required"`
+	UrlImage               string                 `json:"url_image,omitempty" form:"url_image" binding:"required"`
+	IsActive               bool                   `json:"is_active,omitempty" form:"is_active" binding:"required"`
+	CreatedAt              time.Time              `json:"created_at,omitempty" default:"now"`
+	UpdatedAt              time.Time              `json:"updated_at,omitempty" default:"now"`
+	RepairEquipmentRequest RepairEquipmentRequest `gorm:"foreignKey:RepairRequestID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"request_id,omitempty"`
 }
 
 func (obj *ImageRequest) BeforeCreate(tx *gorm.DB) (err error) {
+	id, _ := g.New()
+	obj.ID = id
+	return
+}
+
+type ConfirmEquipment struct {
+	ID                     string                 `json:"id,omitempty"`
+	RepairRequestID        *string                `json:"repair_request_id,omitempty" form:"repair_request_id" binding:"required"`
+	ConfirmByID            *string                `json:"accep_by_id" form:"accep_by_id"`
+	Recording              string                 `json:"recording,omitempty" form:"recording"`
+	IsActive               bool                   `json:"is_active,omitempty" form:"is_active" binding:"required"`
+	CreatedAt              time.Time              `json:"created_at,omitempty" default:"now"`
+	UpdatedAt              time.Time              `json:"updated_at,omitempty" default:"now"`
+	RepairEquipmentRequest RepairEquipmentRequest `gorm:"foreignKey:RepairRequestID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"request_id,omitempty"`
+	Profile                Profile                `gorm:"foreignKey:ConfirmByID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"confirm_by,omitempty"`
+}
+
+func (obj *ConfirmEquipment) BeforeCreate(tx *gorm.DB) (err error) {
 	id, _ := g.New()
 	obj.ID = id
 	return
