@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/cvst/apiv1/configs"
+	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
@@ -43,5 +44,15 @@ func init() {
 }
 
 func main() {
-	print("main api")
+	// Create config variable
+	config := fiber.Config{
+		Prefork:       true,
+		CaseSensitive: true,
+		StrictRouting: true,
+		ServerHeader:  "CVST Server API Service", // add custom server header
+		AppName:       "API Version 1.0",
+		BodyLimit:     10 * 1024 * 1024, // this is the default limit of 10MB
+	}
+
+	fmt.Println(config)
 }
