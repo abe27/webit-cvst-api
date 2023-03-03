@@ -63,6 +63,7 @@ type RepairRequest struct {
 	ID              string        `json:"id,omitempty"`
 	RequestDate     time.Time     `json:"request_date,omitempty" form:"request_date"`
 	RequestNo       string        `gorm:"size:25;" json:"request_no" form:"request_no"`
+	RequestTypeID   *string       `json:"request_type_id,omitempty" form:"request_type_id"`
 	RequestByID     *string       `json:"request_by_id,omitempty" form:"request_by_id"`
 	AssetID         *string       `json:"asset_id,omitempty" form:"asset_id" binding:"required"`
 	ProbleDetail    string        `json:"proble_detail,omitempty" form:"proble_detail"`
@@ -73,6 +74,7 @@ type RepairRequest struct {
 	User            User          `gorm:"foreignKey:RequestByID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;" json:"request_by,omitempty"`
 	Asset           Asset         `gorm:"foreignKey:AssetID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"asset,omitempty"`
 	RequestStatus   RequestStatus `gorm:"foreignKey:RequestStatusID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"status,omitempty"`
+	RequestType     RequestType   `gorm:"foreignKey:RequestTypeID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"request_type,omitempty"`
 }
 
 func (obj *RepairRequest) BeforeCreate(tx *gorm.DB) (err error) {
